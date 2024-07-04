@@ -14,7 +14,7 @@ interface Add {
   (x: string, y: string): string;
 }
 
-const add1: Add = (X, y) => x + y;
+const add1: Add = (x, y) => x + y;
 
 //* class에서의 오버로딩
 class A {
