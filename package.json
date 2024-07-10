@@ -13,5 +13,8 @@
     "jquery": "^3.7.1",
     "redux": "^5.0.1",
     "typescript": "^5.5.2"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.30"
   }
 }
