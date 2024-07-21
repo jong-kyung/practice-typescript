@@ -1,4 +1,7 @@
+import cookieParser from "cookie-parser";
 import express, { ErrorRequestHandler, RequestHandler } from "express";
+import session from "express-session";
+import passport from "passport";
 
 // Express 대략적인 타입 형태 예상
 // interface Express {
@@ -14,6 +17,15 @@ app.use(express.json()); // body-parser
 app.use(express.urlencoded({ extended: false }));
 app.use("/", express.static("public"));
 
+app.use(cookieParser()); // cookie-parser
+app.use(
+  session({
+    secret: "secret",
+  })
+);
+app.use(passport.initialize()); // passport
+app.use(passport.session()); // passport
+
 // 미들웨어는 RequestHandler 타입이다.
 const middleware: RequestHandler<
   { paramType: string },
@@ -27,6 +39,11 @@ const middleware: RequestHandler<
   req.query.queryType;
   res.locals.localType;
   res.json({ message: "Hello World" });
+
+  req.cookies; // cookie-parser
+  req.session; // express-session
+  req.isAuthenticated(); // passport
+  req.user?.front; // passport 타입 확장하기
 };
 
 app.get("/", middleware);
