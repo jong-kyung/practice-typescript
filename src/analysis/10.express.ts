@@ -2,6 +2,7 @@ import cookieParser from "cookie-parser";
 import express, { ErrorRequestHandler, RequestHandler } from "express";
 import session from "express-session";
 import passport from "passport";
+import flash from "connect-flash";
 
 // Express 대략적인 타입 형태 예상
 // interface Express {
@@ -44,6 +45,10 @@ const middleware: RequestHandler<
   req.session; // express-session
   req.isAuthenticated(); // passport
   req.user?.front; // passport 타입 확장하기
+
+  req.flash("플래시 메시지"); // 값을 설정한다.
+  const a = req.flash(); // 값을 가져온다.
+  req.flash(); // undefined가 된다.
 };
 
 app.get("/", middleware);
